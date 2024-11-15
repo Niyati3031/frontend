@@ -10,13 +10,12 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.performance = {
-        maxAssetSize: 1024 * 1024, // Set limit to 1MB or as needed
-        maxEntrypointSize: 1024 * 1024,
-      };
-    }
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: "javascript/auto",
+    });
     return config;
   },
 };
